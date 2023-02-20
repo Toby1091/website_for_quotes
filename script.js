@@ -5,14 +5,13 @@ const QUOTES_CSV_URL = 'quotes.csv';
 async function fetchQuotes() {
   const response = await fetch(QUOTES_CSV_URL);
   const text = await response.text();
-  const rows = text.trim().split('\n');
-  const header = rows.shift();
-  const quotes = rows.map(row => {
-    const cells = row.split(',');
-    return { text: cells[0].replace(/"/g, ''), author: cells[1].replace(/"/g, '') };
+  const quotes = text.trim().split('\n').map(row => {
+    const [text, author] = row.split(',');
+    return { text: text.replace(/"/g, ''), author: author.replace(/"/g, '') };
   });
   return quotes;
 }
+
 
 // Display a random quote from the list of quotes.
 async function displayQuote() {
