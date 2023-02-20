@@ -21,7 +21,7 @@ async function displayQuote() {
   const quoteText = document.getElementById('quote-text');
   const quoteAuthor = document.getElementById('quote-author');
   quoteText.textContent = quote.text;
-  quoteAuthor.textContent = `- ${quote.author}`;
+  quoteAuthor.textContent = quote.author;
 }
 
 // Display a quote when the page is first loaded.
