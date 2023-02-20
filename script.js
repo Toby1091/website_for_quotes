@@ -6,11 +6,11 @@ async function fetchQuotes() {
   const response = await fetch(QUOTES_CSV_URL);
   const text = await response.text();
   const quotes = text.trim().split('\n').map(row => {
-    const [text, author] = row.split(',');
-    return { text: text.replace(/"/g, ''), author: author.replace(/"/g, '') };
+    return { text: row.trim() };
   });
   return quotes;
 }
+
 
 
 // Display a random quote from the list of quotes.
