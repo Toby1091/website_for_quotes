@@ -5,7 +5,7 @@ const QUOTES_CSV_URL = 'quotes.csv';
 async function fetchQuotes() {
   const response = await fetch(QUOTES_CSV_URL);
   const text = await response.text();
-  const quotes = text.split('\n').map(quote => quote.slice(2, -10));
+  const quotes = Papa.parse(text, { delimiter: '\n', header: false }).data.flat();
   return quotes;
 }
 
