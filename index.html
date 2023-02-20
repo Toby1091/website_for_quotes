@@ -12,19 +12,21 @@
     #quote {
       background-color: #fff;
       border-radius: 10px;
-      padding: 40px;
+      padding: 20px;
       margin: 20px auto;
       max-width: 600px;
+      height: 300px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
 
     #quote-text {
-      font-size: 2.5em;
+      font-size: 2em;
+      margin: 0 0 20px 0;
       font-style: italic;
-      margin: 0;
     }
   </style>
 </head>
@@ -34,14 +36,14 @@
   </div>
 
   <script>
-    // Replace the URL below with the path to your quotes.txt file.
-    const QUOTES_URL = 'quotes.txt';
+    // Replace the URL below with the path to your quotes.csv file.
+    const QUOTES_CSV_URL = 'quotes.csv';
 
-    // Retrieve the quotes as text and parse them into an array of strings.
+    // Retrieve the CSV file as text and parse it into an array of quote objects.
     async function fetchQuotes() {
-      const response = await fetch(QUOTES_URL);
+      const response = await fetch(QUOTES_CSV_URL);
       const text = await response.text();
-      const quotes = text.trim().split('\n');
+      const quotes = text.split('\n').map(quote => quote.replace(/"""/g, ''));
       return quotes;
     }
 
