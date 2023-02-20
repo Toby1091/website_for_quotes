@@ -14,8 +14,8 @@
       border-radius: 10px;
       padding: 20px;
       margin: 20px auto;
-      max-width: 600px;
-      height: 300px;
+      max-width: 800px;
+      height: 400px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -25,8 +25,9 @@
 
     #quote-text {
       font-size: 2em;
-      margin: 0 0 20px 0;
       font-style: italic;
+      margin: 0;
+      padding: 0;
     }
   </style>
 </head>
@@ -43,7 +44,7 @@
     async function fetchQuotes() {
       const response = await fetch(QUOTES_CSV_URL);
       const text = await response.text();
-      const quotes = text.split('\n').map(quote => quote.replace(/"""/g, ''));
+      const quotes = text.trim().split('\n').map(q => q.slice(1, -1));
       return quotes;
     }
 
