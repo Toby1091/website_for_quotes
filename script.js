@@ -5,8 +5,8 @@ const QUOTES_CSV_URL = 'quotes.csv';
 async function fetchQuotes() {
   const response = await fetch(QUOTES_CSV_URL);
   const text = await response.text();
-  const quotes = text.trim().split('""\n');
-  return quotes.map(q => q.replace(/"/g, '').trim());
+  const quotes = text.split('\n').map(quote => quote.slice(1, -1));
+  return quotes;
 }
 
 // Display a random quote from the list of quotes.
