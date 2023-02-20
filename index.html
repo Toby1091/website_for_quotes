@@ -36,6 +36,7 @@
     <p id="quote-text"></p>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <script>
     // Replace the URL below with the path to your quotes.csv file.
     const QUOTES_CSV_URL = 'quotes.csv';
@@ -44,7 +45,7 @@
     async function fetchQuotes() {
       const response = await fetch(QUOTES_CSV_URL);
       const text = await response.text();
-      const quotes = text.trim().split('\n').map(q => q.slice(1, -1));
+      const quotes = Papa.parse(text, { delimiter: '\n', header: false }).data.flat();
       return quotes;
     }
 
