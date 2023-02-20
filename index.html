@@ -14,34 +14,47 @@
       border-radius: 10px;
       padding: 40px;
       margin: 20px auto;
-      max-width: 800px;
-      height: 300px;
+      max-width: 600px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
 
     #quote-text {
-      font-size: 1.5em;
+      font-size: 2.5em;
       font-style: italic;
       margin: 0;
-    }
-
-    #quote-author {
-      font-size: 1.2em;
-      font-style: normal;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div id="quote">
     <p id="quote-text"></p>
-    <p id="quote-author"></p>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Replace the URL below with the path to your quotes.txt file.
+    const QUOTES_URL = 'quotes.txt';
+
+    // Retrieve the quotes as text and parse them into an array of strings.
+    async function fetchQuotes() {
+      const response = await fetch(QUOTES_URL);
+      const text = await response.text();
+      const quotes = text.trim().split('\n');
+      return quotes;
+    }
+
+    // Display a random quote from the list of quotes.
+    async function displayQuote() {
+      const quotes = await fetchQuotes();
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      const quoteText = document.getElementById('quote-text');
+      quoteText.textContent = quote;
+    }
+
+    // Display a quote when the page is first loaded.
+    displayQuote();
+  </script>
 </body>
 </html>
