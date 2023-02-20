@@ -1,12 +1,12 @@
-// Replace the URL below with the path to your quotes.txt file.
-const QUOTES_URL = 'quotes.txt';
+// Replace the URL below with the path to your quotes.csv file.
+const QUOTES_CSV_URL = 'quotes.csv';
 
-// Retrieve the quotes as text and parse them into an array of strings.
+// Retrieve the CSV file as text and parse it into an array of quote objects.
 async function fetchQuotes() {
-  const response = await fetch(QUOTES_URL);
+  const response = await fetch(QUOTES_CSV_URL);
   const text = await response.text();
-  const quotes = text.trim().split('\n');
-  return quotes;
+  const quotes = text.trim().split('""\n');
+  return quotes.map(q => q.replace(/"/g, '').trim());
 }
 
 // Display a random quote from the list of quotes.
